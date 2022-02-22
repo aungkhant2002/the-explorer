@@ -1,10 +1,45 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-// Variables
-@import 'variables';
+// Body
+//$body-bg: #f8fafc;
+
+// Typography
+//$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: 'Poppins', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$primary: #509399;
+$border-radius: 1rem;
+$border-radius-lg: 2rem;
+$btn-padding-x-lg: 2rem;
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~venobox/dist/venobox.min.css";
+
+.user-img {
+    width: 40px;
+    height: 40px;
+}
+
+.cover-img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.h-350 {
+    height: 350px;
+}
+
+.post {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 1.5rem;
+}
+
+.post:last-child {
+    border-bottom: none;
+}

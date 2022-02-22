@@ -2,6 +2,7 @@ window._ = require('lodash');
 
 try {
     window.bootstrap = require('bootstrap');
+    window.VenoBox = require('venobox');
     window.ScrollReveal = require('scrollreveal');
 } catch (e) {}
 
