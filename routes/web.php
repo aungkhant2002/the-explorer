@@ -16,6 +16,7 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, "index"])->name('index');
+Route::get('/detail/{slug}', [PageController::class, "detail"])->name('post.detail');
 
 Auth::routes();
 

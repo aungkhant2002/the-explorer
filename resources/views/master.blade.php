@@ -16,7 +16,7 @@
     @csrf
 </form>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm position-fixed top-0 w-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm position-fixed top-0 w-100" style="z-index: 5;">
     <div class="container">
         <a class="navbar-brand" href="{{ route('index') }}">
             <img src="{{ asset('images/logo.png') }}" height="50" alt="">

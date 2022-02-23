@@ -39,7 +39,7 @@
                                                 {{ $post->created_at->format('d M Y') }}
                                             </p>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Read More</a>
+                                        <a href="{{ route('post.detail', $post->slug) }}" class="btn btn-outline-primary">Read More</a>
                                     </div>
                                 </div>
                             </div>

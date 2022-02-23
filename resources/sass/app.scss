@@ -12,7 +12,8 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 $primary: #509399;
-$border-radius: 1rem;
+$border-radius: 1.5rem;
+$btn-padding-x: 1.5rem;
 $border-radius-lg: 2rem;
 $btn-padding-x-lg: 2rem;
 
@@ -42,4 +43,8 @@ $btn-padding-x-lg: 2rem;
 
 .post:last-child {
     border-bottom: none;
+}
+
+.post-detail {
+    white-space: pre-line;
 }

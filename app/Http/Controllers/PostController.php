@@ -6,10 +6,18 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('index');
     }
 
     /**
@@ -38,11 +46,6 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $request->validate([
-            "title" => "required|min:3|unique:posts,title",
-            "description" => "required|min:5",
-            "cover" => "required|file|mimetypes:image/jpeg,image/png|max:5000"
-        ]);
 
         $newName = uniqid()."_cover.".$request->file("cover")->extension();
         $request->file("cover")->storeAs("public/cover/", $newName);
@@ -67,7 +70,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return redirect()->route('post.detail', $post->slug);
     }
 
     /**
@@ -78,7 +81,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        Gate::authorize("update", $post);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -90,7 +94,30 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->description = $request->description;
+        $post->excerpt = Str::words($request->description, 30);
+
+        if ($request->hasFile('cover')) {
+
+//            delete old cover
+            Storage::delete("public/cover/".$post->cover_photo);
+
+
+//            upload new cover
+            $newName = uniqid()."_cover.".$request->file("cover")->extension();
+            $request->file("cover")->storeAs("public/cover/", $newName);
+
+//            save in db
+            $post->cover_photo = $newName;
+
+        }
+
+        $post->update();
+
+        return redirect()->route('post.detail', $post->slug);
     }
 
     /**
@@ -101,6 +128,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Gate::authorize('delete', $post);
+        Storage::delete("public/cover/".$post->cover_photo);
+
+        $post->delete();
+
+        return redirect()->route('index');
+
     }
 }
