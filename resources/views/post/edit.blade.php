@@ -19,7 +19,7 @@
                     @csrf
                     @method('put')
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="postTitle" value="{{ $post->title }}">
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="postTitle" value="{{ old('title', $post->title) }}">
                         <label for="title">Post Title</label>
                         @error("title")
                         <small class="text-danger fw-bold">{{ $message }}</small>
@@ -27,13 +27,13 @@
                     </div>
                     <div class="mb-4">
                         <img src="{{ asset('storage/cover/'.$post->cover_photo) }}" id="coverPreview" class="cover-img w-100 rounded @error('cover') is-invalid @enderror" alt="">
-                        <input type="file" name="cover" id="cover" class="d-none">
+                        <input type="file" name="cover" id="cover" class="d-none" accept="image/jpeg,image/png">
                         @error("cover")
                         <small class="text-danger fw-bold">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-floating mb-4">
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px">{{ $post->description }}</textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px">{{ old('description', $post->description) }}</textarea>
                         <label for="floatingTextarea2">Share your experience</label>
                         @error("description")
                         <small class="text-danger fw-bold">{{ $message }}</small>

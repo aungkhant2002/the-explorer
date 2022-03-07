@@ -25,8 +25,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <img src="{{ asset('image-default.png') }}" id="coverPreview" class="cover-img w-100 rounded @error('cover') is-invalid @enderror" alt="">
-                    <input type="file" name="cover" id="cover" class="d-none">
+                    <img src="{{ asset('image-default.png') }}" id="coverPreview" class="cover-img w-100 rounded @error('cover') is-invalid border border-danger @enderror" alt="">
+                    <input type="file" name="cover" id="cover" class="d-none" accept="image/jpeg,image/png">
                     @error("cover")
                     <small class="text-danger fw-bold">{{ $message }}</small>
                     @enderror
