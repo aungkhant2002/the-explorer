@@ -13,6 +13,19 @@
                              class="mb-4 cover-img rounded-3 w-100" alt="">
                         <p class="mb-4 text-black-50 post-detail">{{ $post->description }}</p>
 
+                        @isset($post->galleries)
+                            <div class="gallery border rounded mb-4">
+                                <h4 class="text-center fw-bold mt-4">Post Gallery</h4>
+                                <div class="row g-4 py-4 px-2">
+                                    @foreach($post->galleries as $gallery)
+                                        <div class="col-12 col-lg-4 col-xl-3">
+                                            <img src="{{ asset('storage/gallery/'.$gallery->photo) }}" class="gallery-photo" alt="">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endisset
+
                         {{-- comment section--}}
 
                         <div class="mb-5">
@@ -21,7 +34,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-12 col-lg-8">
                                     <div class="comments">
-                                        @forelse($post->comments as $comment)
+                                        @foreach($post->comments as $comment)
                                             <div class="border rounded p-4 mb-3">
                                                 <div class="d-flex justify-content-between mb-3">
                                                     <div class="d-flex">
@@ -35,22 +48,21 @@
                                                         </p>
                                                     </div>
                                                     @can("delete", $comment)
-                                                    <form action="{{ route('comment.destroy', $comment->id) }}"
-                                                          method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-outline-danger btn-sm rounded-circle">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
+                                                        <form action="{{ route('comment.destroy', $comment->id) }}"
+                                                              method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button
+                                                                class="btn btn-outline-danger btn-sm rounded-circle">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </form>
                                                     @endcan
                                                 </div>
 
                                                 <p class="mb-0">{{ $comment->message }}</p>
                                             </div>
-                                        @empty
-                                            <p class="text-center">There is no comment.</p>
-                                        @endforelse
+                                        @endforeach
                                     </div>
                                     @auth
                                         <form action="{{ route('comment.store') }}" method="post" id="comment-create">
