@@ -13,18 +13,20 @@
                              class="mb-4 cover-img rounded-3 w-100" alt="">
                         <p class="mb-4 text-black-50 post-detail">{{ $post->description }}</p>
 
-                        @isset($post->galleries)
+                        @if($post->galleries->count())
                             <div class="gallery border rounded mb-4">
                                 <h4 class="text-center fw-bold mt-4">Post Gallery</h4>
                                 <div class="row g-4 py-4 px-2">
                                     @foreach($post->galleries as $gallery)
                                         <div class="col-12 col-lg-4 col-xl-3">
-                                            <img src="{{ asset('storage/gallery/'.$gallery->photo) }}" class="gallery-photo" alt="">
+                                            <a class="venobox" data-gall="gallery" href="{{ asset('storage/gallery/'.$gallery->photo) }}">
+                                                <img src="{{ asset('storage/gallery/'.$gallery->photo) }}" class="gallery-photo" alt="">
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-                        @endisset
+                        @endif
 
                         {{-- comment section--}}
 

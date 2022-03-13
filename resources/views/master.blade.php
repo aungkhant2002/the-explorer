@@ -43,7 +43,7 @@
                             <img src="{{ asset(auth()->user()->photo) }}" class="user-img rounded-circle border border-2 border-white shadow-sm" alt="">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('edit-profile') }}">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="#">Change Password</a></li>
                             <li>
                                 <hr class="dropdown-divider">

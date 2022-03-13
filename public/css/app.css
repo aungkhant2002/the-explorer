@@ -11325,3 +11325,11 @@ textarea.form-control-lg {
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}

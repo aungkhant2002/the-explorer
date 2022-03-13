@@ -55,3 +55,10 @@ $btn-padding-x-lg: 2rem;
     border-radius: 1.5rem;
     object-fit: cover;
 }
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
