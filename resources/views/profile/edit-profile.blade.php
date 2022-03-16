@@ -8,6 +8,10 @@
             <div class="col-12 col-lg-6 col-xl-5">
                 <div class="text-center">
                     <img src="{{ asset(auth()->user()->photo) }}" class="profile-image" alt="">
+                    <br>
+                    <button class="btn btn-primary btn-sm" id="edit-photo" style="margin-top: -25px">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
                     <p class="mb-0">{{ auth()->user()->name }}</p>
                     <p class="small text-black-50">{{ auth()->user()->email }}</p>
                 </div>
@@ -39,8 +43,9 @@
 
         let profileImage = document.querySelector(".profile-image");
         let photo = document.querySelector("[name='photo']");
+        let editPhoto = document.querySelector("#edit-photo");
 
-        profileImage.addEventListener("click", function () {
+        editPhoto.addEventListener("click", function () {
            photo.click();
         });
 

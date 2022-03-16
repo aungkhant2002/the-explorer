@@ -57,7 +57,7 @@
                                     <form action="{{ route('gallery.destroy', $gallery->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-outline-danger">
+                                        <button class="btn btn-danger btn-sm gallery-img-delete">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>

@@ -11333,3 +11333,8 @@ textarea.form-control-lg {
      object-fit: cover;
   border-radius: 50%;
 }
+
+.gallery-img-delete {
+  margin-left: -34px;
+  margin-bottom: 3px;
+}

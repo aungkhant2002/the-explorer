@@ -44,7 +44,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('edit-profile') }}">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{{ route('change-password') }}">Change Password</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -60,6 +60,10 @@
 
 
 @yield("content")
+
+<div class="bg-primary text-light py-4 text-center">
+    &copy; {{ date("Y") }} Aung Khant. All Rights Reversed.
+</div>
 
 
 <script src="{{ asset('js/app.js') }}"></script>

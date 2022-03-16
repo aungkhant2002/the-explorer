@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -48,5 +49,29 @@ class HomeController extends Controller
         }
         $user->update();
         return redirect()->back();
+    }
+
+    public function changePassword()
+    {
+        return view('profile.change-password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            "old_password" => "required|min:6|",
+            "password" => "required|min:6|",
+            "password_confirmation" => "required|min:6|same:password"
+        ]);
+
+        if (!Hash::check($request->old_password, \auth()->user()->password)) {
+            return redirect()->back()->withErrors(["old_password" => "Password don't match"]);
+        }
+
+        $user = User::find(\auth()->id());
+        $user->password = Hash::make($request->password);
+        $user->update();
+        \auth()->logout();
+        return redirect()->route("login");
     }
 }

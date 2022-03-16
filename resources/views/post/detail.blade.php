@@ -19,8 +19,10 @@
                                 <div class="row g-4 py-4 px-2">
                                     @foreach($post->galleries as $gallery)
                                         <div class="col-12 col-lg-4 col-xl-3">
-                                            <a class="venobox" data-gall="gallery" href="{{ asset('storage/gallery/'.$gallery->photo) }}">
-                                                <img src="{{ asset('storage/gallery/'.$gallery->photo) }}" class="gallery-photo" alt="">
+                                            <a class="venobox" data-gall="gallery"
+                                               href="{{ asset('storage/gallery/'.$gallery->photo) }}">
+                                                <img src="{{ asset('storage/gallery/'.$gallery->photo) }}"
+                                                     class="gallery-photo" alt="">
                                             </a>
                                         </div>
                                     @endforeach
@@ -36,7 +38,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-12 col-lg-8">
                                     <div class="comments">
-                                        @foreach($post->comments as $comment)
+                                        @forelse($post->comments as $comment)
                                             <div class="border rounded p-4 mb-3">
                                                 <div class="d-flex justify-content-between mb-3">
                                                     <div class="d-flex">
@@ -64,7 +66,17 @@
 
                                                 <p class="mb-0">{{ $comment->message }}</p>
                                             </div>
-                                        @endforeach
+                                        @empty
+                                            <p class="text-center">
+                                                There is no Comment yet!
+                                                @auth
+                                                    Start comment now.
+                                                @endauth
+                                                @guest
+                                                    <a href="{{ route('login') }}">Login</a> to comment
+                                                @endguest
+                                            </p>
+                                        @endforelse
                                     </div>
                                     @auth
                                         <form action="{{ route('comment.store') }}" method="post" id="comment-create">
