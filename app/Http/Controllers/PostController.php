@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PostMail;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -58,6 +60,15 @@ class PostController extends Controller
         $post->cover_photo = $newName;
         $post->user_id = Auth::id();
         $post->save();
+
+//        mail send here
+
+//        Mail::to("aungkhantlay.009@gmail.com")->send(new PostMail($post));
+
+        $postMail = new PostMail($post);
+        $postMail->subject("အသစ်တွေ ပို့ပေးမယ်");
+        Mail::to("aungkhantlay.009@gmail.com")->send($postMail);
+
 
         return redirect()->route("index");
     }
