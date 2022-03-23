@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PageController;
@@ -21,7 +22,8 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [PageController::class, "index"])->name('index');
 Route::get('/detail/{slug}', [PageController::class, "detail"])->name('post.detail');
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -33,3 +35,10 @@ Route::get('/edit-profile', [HomeController::class, 'editProfile'])->name('edit-
 Route::post('/edit-profile', [HomeController::class, 'updateProfile'])->name('update-profile');
 Route::get('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
 Route::post('/update-password', [HomeController::class, 'updatePassword'])->name('update-password');
+//Route::middleware('verify')->group(function () {
+//
+//});
+
+Route::get('job-test', [PageController::class, 'jobTest']);
+
+
