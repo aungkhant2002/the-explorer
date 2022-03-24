@@ -16,7 +16,7 @@ class PageController extends Controller
 
     public function detail($slug)
     {
-        $post = Post::where("slug", $slug)->firstOrFail();
+        $post = Post::where("slug", $slug)->with(['comments', 'galleries'])->firstOrFail();
         return view('post.detail', compact('post'));
     }
 

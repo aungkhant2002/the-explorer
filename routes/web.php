@@ -31,10 +31,13 @@ Route::resource('/post', PostController::class);
 Route::resource('/comment', CommentController::class);
 Route::resource('/gallery', GalleryController::class);
 
-Route::get('/edit-profile', [HomeController::class, 'editProfile'])->name('edit-profile');
-Route::post('/edit-profile', [HomeController::class, 'updateProfile'])->name('update-profile');
-Route::get('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
-Route::post('/update-password', [HomeController::class, 'updatePassword'])->name('update-password');
+Route::prefix('/user')->group(function () {
+    Route::get('/edit-profile', [HomeController::class, 'editProfile'])->name('edit-profile');
+    Route::post('/edit-profile', [HomeController::class, 'updateProfile'])->name('update-profile');
+    Route::get('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
+    Route::post('/update-password', [HomeController::class, 'updatePassword'])->name('update-password');
+});
+
 //Route::middleware('verify')->group(function () {
 //
 //});
